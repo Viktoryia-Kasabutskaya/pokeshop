@@ -14,7 +14,6 @@ const SignInLayout = ({
   isAuthenticated,
   error,
 }) => {
-  console.log(error);
   return (
     <div className={styles.wrapper}>
       <h1>Login</h1>
@@ -32,7 +31,7 @@ const SignInLayout = ({
       </p>
       {isAuthenticated && (
         <CustomAlert
-          timer={4000}
+          timer={3000}
           severity="success"
           message="You successfully log in. Welcome to our community. We are happy to have you on board."
         />
