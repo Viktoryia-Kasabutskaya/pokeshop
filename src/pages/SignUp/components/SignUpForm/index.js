@@ -4,6 +4,7 @@ import CustomButton from "components/CustomButton";
 import CustomInput from "components/CustomInput";
 
 import styles from "./styles.module.scss";
+import CustomSelect from "components/CustomSelect";
 
 const SignUpForm = ({ formik }) => {
   return (
@@ -66,10 +67,8 @@ const SignUpForm = ({ formik }) => {
             {formik.errors.confirmPassword}
           </div>
         )}
-        <CustomInput
-          label="Gender"
+        <CustomSelect
           name="gender"
-          type="text"
           value={formik.values.gender}
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
@@ -89,7 +88,7 @@ const SignUpForm = ({ formik }) => {
           <div className={styles.errorText}>{formik.errors.phone}</div>
         )}
         <CustomButton
-          text="Login"
+          text="Submit"
           type="submit"
           size="medium"
           onClick={formik.handleSubmit}

@@ -1,6 +1,6 @@
 import { createSelector } from "@reduxjs/toolkit";
 
-const PokemonsSelector = (store) => store.pokemonsList;
+export const PokemonsSelector = (store) => store.pokemonsList;
 
 export const PokemonsListSelector = createSelector(
   PokemonsSelector,

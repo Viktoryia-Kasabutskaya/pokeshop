@@ -8,3 +8,13 @@ export const isAuthenticatedSelector = createSelector(
 );
 
 export const errorSelector = createSelector(baseSelector, (auth) => auth.error);
+
+export const profileSelector = createSelector(
+  baseSelector,
+  (auth) => auth.profileData
+);
+
+export const customerIdSelector = createSelector(
+  profileSelector,
+  (profileData) => profileData._id
+);

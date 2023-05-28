@@ -2,10 +2,13 @@ import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
-import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import capitalize from "lodash/capitalize";
 import PropTypes from "prop-types";
+import { useEffect, useState } from "react";
+
+import CustomButton from "components/CustomButton";
+import { useCart } from "hooks";
 
 const PokemonCard = ({
   id,
@@ -15,6 +18,18 @@ const PokemonCard = ({
   handleAddToCart,
   handleLearnMore,
 }) => {
+  const [isPokemonInCart, setIsPokemonInCart] = useState(false);
+  const { cartItems } = useCart();
+
+  const pokemonInCart = (pokemonId, pokemonsInCart) => {
+    const pokemonInCard = pokemonsInCart.find(({ id }) => pokemonId === id);
+    return pokemonId === pokemonInCard?.id;
+  };
+
+  useEffect(() => {
+    setIsPokemonInCart(pokemonInCart(id, cartItems));
+  }, [id, cartItems]);
+
   return (
     <Card sx={{ maxWidth: 360 }}>
       <CardMedia sx={{ height: 150 }} image={image} title={capitalize(name)} />
@@ -27,17 +42,19 @@ const PokemonCard = ({
         </Typography>
       </CardContent>
       <CardActions>
-        <Button
+        <CustomButton
+          disabled={isPokemonInCart}
           size="small"
+          text="Add to Cart"
           onClick={() =>
             handleAddToCart({ id, image, name, price, quantity: 1 })
           }
-        >
-          Add to Cart
-        </Button>
-        <Button size="small" onClick={() => handleLearnMore(id)}>
-          Learn More
-        </Button>
+        />
+        <CustomButton
+          size="small"
+          onClick={() => handleLearnMore(id)}
+          text="Learn More"
+        />
       </CardActions>
     </Card>
   );

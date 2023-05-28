@@ -11,7 +11,6 @@ const PokemonDetailsContainer = () => {
   const dispatch = useDispatch();
 
   const { addItemToCart } = useCart();
-
   const data = useSelector(pokemonSelector);
   const isLoading = useSelector(PokemonLoadingSelector);
 

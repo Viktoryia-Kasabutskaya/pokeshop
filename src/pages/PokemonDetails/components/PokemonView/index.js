@@ -1,5 +1,7 @@
 import capitalize from "lodash/capitalize";
 import PropTypes from "prop-types";
+import { useEffect, useState } from "react";
+import { useCart } from "hooks";
 
 import Spinner from "components/Spinner";
 import ItemStats from "../ItemStats";
@@ -11,6 +13,18 @@ import ItemAbilities from "../ItemAbilities";
 
 const PokemonView = ({ data, isLoading, handleAddToCart }) => {
   const { id, name, image, price, stats, abilities } = data;
+  const [isPokemonInCart, setIsPokemonInCart] = useState(false);
+  const { cartItems } = useCart();
+
+  const pokemonInCart = (pokemonId, pokemonsInCart) => {
+    const pokemonInCard = pokemonsInCart.find(({ id }) => pokemonId === id);
+    return pokemonId === pokemonInCard?.id;
+  };
+
+  useEffect(() => {
+    setIsPokemonInCart(pokemonInCart(id, cartItems));
+  }, [id, cartItems]);
+
   return (
     <>
       {isLoading ? (
@@ -23,6 +37,7 @@ const PokemonView = ({ data, isLoading, handleAddToCart }) => {
               <h1 className={styles.nameText}>{capitalize(name)}</h1>
               <h2>{price}$</h2>
               <CustomButton
+                disabled={isPokemonInCart}
                 text="add to cart"
                 onClick={() =>
                   handleAddToCart({ id, image, name, price, quantity: 1 })
@@ -58,16 +73,12 @@ const PokemonView = ({ data, isLoading, handleAddToCart }) => {
 };
 
 PokemonView.propTypes = {
-  PokemonView: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.number,
-      name: PropTypes.string,
-      image: PropTypes.string,
-      price: PropTypes.number,
-      stats: PropTypes.objectOf(PropTypes.string),
-      abilities: PropTypes.objectOf(PropTypes.string),
-    }).isRequired
-  ).isRequired,
+  data: PropTypes.shape({
+    id: PropTypes.number,
+    name: PropTypes.string,
+    image: PropTypes.string,
+    price: PropTypes.number,
+  }),
   handleAddToCart: PropTypes.func.isRequired,
   isLoading: PropTypes.bool,
 };

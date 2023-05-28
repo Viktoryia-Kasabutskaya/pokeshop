@@ -1,5 +1,12 @@
+import { profileSelector } from "pages/SignIn/selectors";
+
+import { useSelector } from "react-redux";
+import ProfileLayout from "../components/ProfileLayout";
+
 const ProfileContainer = () => {
-  return <div></div>;
+  const profile = useSelector(profileSelector);
+
+  return <ProfileLayout profile={profile} />;
 };
 
 export default ProfileContainer;

@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
+import { useLocation } from "react-router-dom";
 
 import { useCart } from "hooks";
 import { isAuthenticatedSelector } from "pages/SignIn/selectors";
@@ -10,6 +11,8 @@ import styles from "./styles.module.scss";
 const MainLayout = ({ children }) => {
   const { getCartData } = useCart();
 
+  const location = useLocation();
+
   const isAuthenticated = useSelector(isAuthenticatedSelector);
 
   useEffect(() => {
@@ -18,9 +21,14 @@ const MainLayout = ({ children }) => {
     }
   }, [isAuthenticated]);
 
+  const showHeader =
+    isAuthenticated &&
+    location.pathname !== "/" &&
+    location.pathname !== "/sign-up";
+
   return (
     <div className={styles.wrapper}>
-      {isAuthenticated && <Header />}
+      {showHeader && <Header />}
       {children}
     </div>
   );

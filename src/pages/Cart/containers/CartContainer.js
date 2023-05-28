@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 
 import { useCart } from "hooks";
@@ -6,6 +6,8 @@ import { cartLoadingSelector } from "../selectors";
 import CartLayout from "../components/CartLayout";
 
 const CartContainer = () => {
+  const [open, setOpen] = useState(false);
+
   const isLoading = useSelector(cartLoadingSelector);
 
   const {
@@ -15,11 +17,19 @@ const CartContainer = () => {
     totalPrice,
     updateItemQuantity,
     deleteItemById,
-    isEmptyCart,
+    deleteAllItems,
   } = useCart();
 
   useEffect(() => {
     getCartData();
+  }, []);
+
+  const handleOpen = useCallback(() => {
+    setOpen(true);
+  }, []);
+
+  const handleClose = useCallback(() => {
+    setOpen(false);
   }, []);
 
   return (
@@ -30,7 +40,10 @@ const CartContainer = () => {
       updateItemQuantity={updateItemQuantity}
       handleDeleteItem={deleteItemById}
       isLoading={isLoading}
-      isEmptyCart={isEmptyCart}
+      handleDeleteAllItems={deleteAllItems}
+      open={open}
+      handleOpen={handleOpen}
+      handleClose={handleClose}
     />
   );
 };

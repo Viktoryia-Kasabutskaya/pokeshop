@@ -7,6 +7,7 @@ import {
   PokemonsErrorsSelector,
   PokemonsListSelector,
   PokemonsLoadingSelector,
+  PokemonsSelector,
 } from "../selectors";
 import { getPokemonsThunk } from "../api";
 import { useCart, usePagination } from "hooks";
@@ -19,7 +20,9 @@ const PokemonsContainer = () => {
 
   const { addItemToCart } = useCart();
 
-  const [page, handlePageChange] = usePagination(1);
+  const { page: prevPage } = useSelector(PokemonsSelector);
+
+  const [page, handlePageChange] = usePagination(prevPage);
 
   const pokemons = useSelector(PokemonsListSelector);
   const errors = useSelector(PokemonsErrorsSelector);
@@ -39,6 +42,7 @@ const PokemonsContainer = () => {
       errors={errors}
       isLoading={isLoading}
       handlePageChange={handlePageChange}
+      page={page}
       handleLearnMore={handleLearnMore}
       handleAddToCart={addItemToCart}
     />

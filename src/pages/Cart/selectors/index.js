@@ -7,11 +7,6 @@ export const cartItemsSelector = createSelector(
   (cart) => cart.items
 );
 
-export const emptyCartSelector = createSelector(
-  cartItemsSelector,
-  (items) => items.length === 0
-);
-
 export const totalPriceSelector = createSelector(
   cartSelector,
   (cart) => cart.totalPrice

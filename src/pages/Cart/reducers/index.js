@@ -1,9 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-import { getItemsThunk } from "../api/thunk/getItems";
-import { addItemThunk } from "../api/thunk/addItem";
-import { updateItemQuantityThunk } from "../api/thunk/updateItemQuantity";
-import { deleteItemThunk } from "../api/thunk/deleteItem";
+import { getItemsThunk } from "../api/thunks/getItems";
+import { addItemThunk } from "../api/thunks/addItem";
+import { updateItemQuantityThunk } from "../api/thunks/updateItemQuantity";
+import { deleteItemThunk } from "../api/thunks/deleteItem";
+import { deleteAllItemsThunk } from "../api/thunks/deleteAllItems";
+import { addOrderThunk } from "../api/thunks/addOrder";
 
 const initialState = {
   items: [],
@@ -92,6 +94,35 @@ const cartSlice = createSlice({
     builder.addCase(deleteItemThunk.rejected, (state, { payload }) => {
       state.isLoading = false;
       state.errors = payload;
+
+      builder.addCase(deleteAllItemsThunk.pending, (state) => {
+        state.isLoading = true;
+        state.errors = null;
+      });
+      builder.addCase(deleteAllItemsThunk.fulfilled, (state) => {
+        state.isLoading = false;
+        state.errors = null;
+      });
+      builder.addCase(deleteAllItemsThunk.rejected, (state, { payload }) => {
+        state.isLoading = false;
+        state.errors = payload;
+      });
+
+      builder.addCase(addOrderThunk.pending, (state) => {
+        state.isLoading = true;
+        state.errors = null;
+      });
+      builder.addCase(addOrderThunk.fulfilled, (state, { payload }) => {
+        state.isLoading = false;
+        state.errors = null;
+        state.items = [];
+        state.totalPrice = 0;
+        state.quantity = 0;
+      });
+      builder.addCase(addOrderThunk.rejected, (state, { payload }) => {
+        state.isLoading = false;
+        state.errors = payload;
+      });
     });
   },
 });

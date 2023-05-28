@@ -4,13 +4,13 @@ import { useCallback } from "react";
 import {
   cartItemsQuantitySelector,
   cartItemsSelector,
-  emptyCartSelector,
   totalPriceSelector,
 } from "pages/Cart/selectors";
-import { getItemsThunk } from "pages/Cart/api/thunk/getItems";
-import { addItemThunk } from "pages/Cart/api/thunk/addItem";
-import { updateItemQuantityThunk } from "pages/Cart/api/thunk/updateItemQuantity";
-import { deleteItemThunk } from "pages/Cart/api/thunk/deleteItem";
+import { getItemsThunk } from "pages/Cart/api/thunks/getItems";
+import { addItemThunk } from "pages/Cart/api/thunks/addItem";
+import { updateItemQuantityThunk } from "pages/Cart/api/thunks/updateItemQuantity";
+import { deleteItemThunk } from "pages/Cart/api/thunks/deleteItem";
+import { deleteAllItemsThunk } from "pages/Cart/api/thunks/deleteAllItems";
 
 const useCart = () => {
   const dispatch = useDispatch();
@@ -18,7 +18,6 @@ const useCart = () => {
   const cartItems = useSelector(cartItemsSelector);
   const cartItemsQuantity = useSelector(cartItemsQuantitySelector);
   const totalPrice = useSelector(totalPriceSelector);
-  const isEmptyCart = useSelector(emptyCartSelector);
 
   const getCartData = useCallback(() => {
     dispatch(getItemsThunk());
@@ -45,6 +44,14 @@ const useCart = () => {
     [dispatch]
   );
 
+  const deleteAllItems = useCallback(
+    (items) => {
+      const deletedItems = items.map(({ id }) => dispatch(deleteItemThunk(id)));
+      dispatch(deleteAllItemsThunk(deletedItems));
+    },
+    [dispatch]
+  );
+
   return {
     cartItems,
     cartItemsQuantity,
@@ -53,7 +60,7 @@ const useCart = () => {
     addItemToCart,
     updateItemQuantity,
     deleteItemById,
-    isEmptyCart,
+    deleteAllItems,
   };
 };
 

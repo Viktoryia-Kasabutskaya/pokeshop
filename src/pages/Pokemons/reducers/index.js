@@ -4,7 +4,7 @@ import { getPokemonsThunk } from "../api";
 
 const initialState = {
   data: [],
-  pokemonDetails: {},
+  page: 1,
   isLoading: false,
   errors: null,
 };
@@ -12,7 +12,11 @@ const initialState = {
 const pokemonsSlice = createSlice({
   name: "pokemonsList",
   initialState,
-  reducers: {},
+  reducers: {
+    savePreviousPage: (state, { payload }) => {
+      state.page = payload;
+    },
+  },
   extraReducers: (builder) => {
     builder.addCase(getPokemonsThunk.pending, (state) => {
       state.isLoading = true;
@@ -29,5 +33,5 @@ const pokemonsSlice = createSlice({
     });
   },
 });
-
+export const { savePreviousPage } = pokemonsSlice.actions;
 export default pokemonsSlice.reducer;
