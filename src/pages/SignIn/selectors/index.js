@@ -13,6 +13,10 @@ export const profileSelector = createSelector(
   baseSelector,
   (auth) => auth.profileData
 );
+export const isLoadingSelector = createSelector(
+  baseSelector,
+  (auth) => auth.isLoading
+);
 
 export const customerIdSelector = createSelector(
   profileSelector,

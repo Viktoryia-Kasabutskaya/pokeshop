@@ -5,6 +5,7 @@ import { useLocation } from "react-router-dom";
 import { useCart } from "hooks";
 import { isAuthenticatedSelector } from "pages/SignIn/selectors";
 import Header from "../Header";
+import Footer from "components/Footer";
 
 import styles from "./styles.module.scss";
 
@@ -21,15 +22,16 @@ const MainLayout = ({ children }) => {
     }
   }, [isAuthenticated]);
 
-  const showHeader =
+  const showHeaderAndFooter =
     isAuthenticated &&
     location.pathname !== "/" &&
     location.pathname !== "/sign-up";
 
   return (
     <div className={styles.wrapper}>
-      {showHeader && <Header />}
-      {children}
+      {showHeaderAndFooter && <Header />}
+      <div className={styles.main}>{children}</div>
+      {showHeaderAndFooter && <Footer />}
     </div>
   );
 };

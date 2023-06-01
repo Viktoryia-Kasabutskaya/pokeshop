@@ -2,6 +2,7 @@ import PropTypes from "prop-types";
 
 import CustomButton from "components/CustomButton";
 import CustomInput from "components/CustomInput";
+import CustomInputAdornment from "components/CustomInputAdornment";
 
 import styles from "./styles.module.scss";
 
@@ -16,12 +17,11 @@ const SignInForm = ({ form, handleSubmit, handleChange }) => {
           value={form.email}
           onChange={handleChange}
         />
-        <CustomInput
-          label="Password"
-          name="password"
-          type="password"
+        <CustomInputAdornment
+          textLabel="Password"
           value={form.password}
           onChange={handleChange}
+          name="password"
         />
         <CustomButton
           text="Login"

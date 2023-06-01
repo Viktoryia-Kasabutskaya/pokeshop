@@ -2,9 +2,10 @@ import PropTypes from "prop-types";
 
 import CustomButton from "components/CustomButton";
 import CustomInput from "components/CustomInput";
+import CustomSelect from "components/CustomSelect";
+import CustomInputAdornment from "components/CustomInputAdornment";
 
 import styles from "./styles.module.scss";
-import CustomSelect from "components/CustomSelect";
 
 const SignUpForm = ({ formik }) => {
   return (
@@ -43,18 +44,17 @@ const SignUpForm = ({ formik }) => {
         {formik.touched.email && formik.errors.email && (
           <div className={styles.errorText}>{formik.errors.email}</div>
         )}
-        <CustomInput
-          label="Password"
-          name="password"
-          type="password"
+        <CustomInputAdornment
+          textLabel="Password"
           value={formik.values.password}
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
+          name="password"
         />
         {formik.touched.password && formik.errors.password && (
           <div className={styles.errorText}>{formik.errors.password}</div>
         )}
-        <CustomInput
+        {/* <CustomInput
           label="Confirm Password"
           name="confirmPassword"
           type="password"
@@ -66,7 +66,7 @@ const SignUpForm = ({ formik }) => {
           <div className={styles.errorText}>
             {formik.errors.confirmPassword}
           </div>
-        )}
+        )} */}
         <CustomSelect
           name="gender"
           value={formik.values.gender}

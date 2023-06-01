@@ -16,8 +16,8 @@ export const signUpValidationSchema = Yup.object({
   password: Yup.string()
     .required("Password is required")
     .min(8, "min 8 symbols"),
-  confirmPassword: Yup.string()
-    .oneOf([Yup.ref("password"), null], "Passwords must match")
-    .required("Confirm password is required"),
+  // confirmPassword: Yup.string()
+  //   .oneOf([Yup.ref("password"), null], "Passwords must match")
+  //   .required("Confirm password is required"),
   phone: Yup.string().required("Phone number is required").min(8).max(15),
 });

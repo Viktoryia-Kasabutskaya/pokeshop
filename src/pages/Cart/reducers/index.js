@@ -5,7 +5,6 @@ import { addItemThunk } from "../api/thunks/addItem";
 import { updateItemQuantityThunk } from "../api/thunks/updateItemQuantity";
 import { deleteItemThunk } from "../api/thunks/deleteItem";
 import { deleteAllItemsThunk } from "../api/thunks/deleteAllItems";
-import { addOrderThunk } from "../api/thunks/addOrder";
 
 const initialState = {
   items: [],
@@ -104,22 +103,6 @@ const cartSlice = createSlice({
         state.errors = null;
       });
       builder.addCase(deleteAllItemsThunk.rejected, (state, { payload }) => {
-        state.isLoading = false;
-        state.errors = payload;
-      });
-
-      builder.addCase(addOrderThunk.pending, (state) => {
-        state.isLoading = true;
-        state.errors = null;
-      });
-      builder.addCase(addOrderThunk.fulfilled, (state, { payload }) => {
-        state.isLoading = false;
-        state.errors = null;
-        state.items = [];
-        state.totalPrice = 0;
-        state.quantity = 0;
-      });
-      builder.addCase(addOrderThunk.rejected, (state, { payload }) => {
         state.isLoading = false;
         state.errors = payload;
       });

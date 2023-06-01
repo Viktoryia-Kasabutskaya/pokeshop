@@ -27,7 +27,9 @@ const Header = () => {
 
   return (
     <div className={styles.wrapper}>
-      <img src={logo} alt="logo" height={50} />
+      <Link to={ROUTE_NAMES.POKEMONS}>
+        <img src={logo} alt="logo" width={50} />
+      </Link>
       <Link to={ROUTE_NAMES.POKEMONS} className={styles.navLink}>
         Pokemons
       </Link>

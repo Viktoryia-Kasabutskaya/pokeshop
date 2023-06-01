@@ -4,6 +4,7 @@ import PropTypes from "prop-types";
 import { ROUTE_NAMES } from "routes/routeNames";
 import SignInForm from "../SignInForm";
 import CustomAlert from "components/CustomAlert";
+import Spinner from "components/Spinner";
 
 import styles from "./styles.module.scss";
 
@@ -13,6 +14,7 @@ const SignInLayout = ({
   handleChange,
   isAuthenticated,
   error,
+  isLoading,
 }) => {
   return (
     <div className={styles.wrapper}>
@@ -29,6 +31,7 @@ const SignInLayout = ({
           Sign Up
         </Link>
       </p>
+      {isLoading && <Spinner />}
       {isAuthenticated && (
         <CustomAlert
           timer={3000}
@@ -47,6 +50,7 @@ SignInLayout.propTypes = {
   handleChange: PropTypes.func,
   isAuthenticated: PropTypes.bool,
   error: PropTypes.string,
+  isLoading: PropTypes.bool,
 };
 
 export default SignInLayout;

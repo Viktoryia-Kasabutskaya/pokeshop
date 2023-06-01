@@ -11,6 +11,7 @@ const CustomInput = ({ value, type, name, label, onChange, onBlur }) => {
       onBlur={onBlur}
       label={label}
       variant="filled"
+      autoComplete="off"
     />
   );
 };

@@ -5,8 +5,10 @@ import CartItem from "../CartItem";
 import EmptyCart from "../EmptyCart";
 import DeleteIcon from "components/DeleteIcon";
 import CustomDialog from "components/CustomDialog";
+import Spinner from "components/Spinner";
 
 import styles from "./styles.module.scss";
+import CustomAlert from "components/CustomAlert";
 
 const CartLayout = ({
   cartItems,
@@ -18,6 +20,9 @@ const CartLayout = ({
   open,
   handleOpen,
   handleClose,
+  handleCreateOrder,
+  isLoading,
+  isOrderSuccessful,
 }) => {
   return (
     <div>
@@ -59,13 +64,21 @@ const CartLayout = ({
             </div>
             <div className={styles.totalPrice}>
               <div>Total Price: {totalPrice}$</div>
-              <CustomButton text="Order" onClick={() => {}} />
+              <CustomButton text="Order" onClick={handleCreateOrder} />
             </div>
           </div>
         </>
       ) : (
         <EmptyCart />
       )}
+      {isOrderSuccessful && (
+        <CustomAlert
+          timer={3000}
+          severity="success"
+          message="Your order has been successfully placed"
+        />
+      )}
+      {isLoading && <Spinner />}
     </div>
   );
 };
@@ -86,6 +99,8 @@ CartLayout.propTypes = {
   open: PropTypes.bool,
   handleOpen: PropTypes.func,
   handleClose: PropTypes.func,
+  isLoading: PropTypes.bool,
+  isOrderSuccessful: PropTypes.bool,
 };
 
 export default CartLayout;

@@ -1,12 +1,25 @@
-import { profileSelector } from "pages/SignIn/selectors";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
 
-import { useSelector } from "react-redux";
+import { profileSelector } from "pages/SignIn/selectors";
 import ProfileLayout from "../components/ProfileLayout";
+import { isLoadingSelector, ordersSelector } from "../selectors";
+import { getOrdersThunk } from "../api/thunks/getOrders";
 
 const ProfileContainer = () => {
-  const profile = useSelector(profileSelector);
+  const dispatch = useDispatch();
 
-  return <ProfileLayout profile={profile} />;
+  const profile = useSelector(profileSelector);
+  const orders = useSelector(ordersSelector);
+  const isLoading = useSelector(isLoadingSelector);
+
+  useEffect(() => {
+    dispatch(getOrdersThunk());
+  }, [dispatch]);
+
+  return (
+    <ProfileLayout profile={profile} orders={orders} isLoading={isLoading} />
+  );
 };
 
 export default ProfileContainer;

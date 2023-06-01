@@ -4,7 +4,11 @@ import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 
 import { signInThunk } from "../api";
-import { errorSelector, isAuthenticatedSelector } from "../selectors";
+import {
+  errorSelector,
+  isAuthenticatedSelector,
+  isLoadingSelector,
+} from "../selectors";
 import { ROUTE_NAMES } from "routes/routeNames";
 import SignInLayout from "../components/SignInLayout";
 
@@ -13,6 +17,7 @@ const SignInContainer = () => {
 
   const isAuthenticated = useSelector(isAuthenticatedSelector);
   const error = useSelector(errorSelector);
+  const isLoading = useSelector(isLoadingSelector);
 
   const navigate = useNavigate();
 
@@ -44,6 +49,7 @@ const SignInContainer = () => {
       handleChange={handleChange}
       handleSubmit={handleSubmit}
       isAuthenticated={isAuthenticated}
+      isLoading={isLoading}
     />
   );
 };

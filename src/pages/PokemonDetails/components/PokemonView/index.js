@@ -4,12 +4,12 @@ import { useEffect, useState } from "react";
 import { useCart } from "hooks";
 
 import Spinner from "components/Spinner";
+import CustomButton from "components/CustomButton";
 import ItemStats from "../ItemStats";
+import ItemAbilities from "../ItemAbilities";
 import { STAT_IMAGES } from "pages/PokemonDetails/config";
 
 import styles from "./styles.module.scss";
-import CustomButton from "components/CustomButton";
-import ItemAbilities from "../ItemAbilities";
 
 const PokemonView = ({ data, isLoading, handleAddToCart }) => {
   const { id, name, image, price, stats, abilities } = data;
