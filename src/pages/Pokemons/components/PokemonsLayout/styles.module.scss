@@ -1,0 +1,33 @@
+.wrapper {
+    padding: 20px 0;
+    text-align: center;
+}
+
+.wrapperCard {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+    margin: 20px 0;
+    justify-content: space-between;
+}
+
+.image {
+    position: relative;
+}
+
+.background {
+    max-width: 100%;
+    width: 1140px;
+}
+
+.greeting {
+    position: absolute;
+    top: 10px;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%);
+    color: blue;
+    font-weight: 500;
+    background-color: rgba(223, 216, 216, 0.555);
+    padding: 5px 10px;
+}

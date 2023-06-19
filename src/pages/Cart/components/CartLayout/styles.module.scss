@@ -1,0 +1,19 @@
+.titles {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  justify-content: space-between;
+  background-color: rgba(233, 233, 233, 0.5);
+}
+
+.controlArea {
+  display: flex;
+  justify-content: space-between;
+}
+
+.totalPrice, .deleteBtn {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    margin: 20px 0;
+    font-weight: 500;
+}

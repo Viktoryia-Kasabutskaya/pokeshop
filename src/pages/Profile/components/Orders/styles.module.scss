@@ -1,0 +1,20 @@
+.titleOrders {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid rgb(233, 233, 233);
+    border-bottom: 1px solid rgb(233, 233, 233);
+}
+
+.wrapperDetails {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid rgb(233, 233, 233);
+}
+
+.image {
+    margin: 0 auto;
+}

@@ -1,0 +1,17 @@
+.wrapper {
+    border-top: 2px solid rgba(154, 151, 151, 0.812);
+    padding: 10px 0 0;
+}
+
+.items {
+    display: grid;
+    grid-template-columns: 60px auto;
+    align-items: center;
+}
+
+.navLink {
+    text-decoration: none;
+    color:#0d6cfa;
+    font-weight: 500;
+    font-size: 20px;
+}
